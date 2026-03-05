@@ -5,7 +5,7 @@ import { Type } from 'class-transformer';
 import { PaginationDto } from '../../../common/dto/pagination.dto';
 
 export class FindAllAudiobooksDto extends PaginationDto {
-  @ApiPropertyOptional({ example: 'Достоевский' })
+  @ApiPropertyOptional({ example: 'Dostoevsky' })
   @IsOptional()
   @IsString()
   @MinLength(2)

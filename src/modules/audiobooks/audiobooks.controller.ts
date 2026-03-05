@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiOkResponse, ApiHeader } from '@nestjs/swagger';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { SkipListened } from '../../common/decorators/skip-listened.decorator';
 import type { UserInfo } from '../../common/interfaces/user-info.interface';
@@ -18,6 +18,7 @@ import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @ApiTags('audiobooks')
 @ApiBearerAuth()
+@ApiHeader({ name: 'skip-listened', description: 'Pass "true" to exclude already-listened audiobooks', required: false })
 @Controller('audiobooks')
 export class AudiobooksController {
   constructor(private readonly audiobooksService: AudiobooksService) {}

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NewsController } from './news.controller';
 import { NewsService } from './news.service';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 
 describe('NewsController', () => {
   let controller: NewsController;
@@ -9,7 +10,10 @@ describe('NewsController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [NewsController],
       providers: [NewsService],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     controller = module.get<NewsController>(NewsController);
   });

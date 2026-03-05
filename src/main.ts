@@ -13,7 +13,7 @@ async function bootstrap() {
     logger: ['warn', 'error'],
   });
   app.setGlobalPrefix('api/v1', {
-    exclude: [{ path: 'health', method: RequestMethod.GET }],
+    exclude: [{ path: 'healthz', method: RequestMethod.GET }],
   });
   app.useGlobalPipes(
     new ValidationPipe({

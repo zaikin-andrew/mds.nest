@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UtmController } from './utm.controller';
 import { UtmService } from './utm.service';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 
 describe('UtmController', () => {
   let controller: UtmController;
@@ -9,7 +10,10 @@ describe('UtmController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UtmController],
       providers: [UtmService],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     controller = module.get<UtmController>(UtmController);
   });
